@@ -7,7 +7,7 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            'Dashboard',
+          'Dashboard',
           style: TextStyle(
             fontSize: 29,
             fontWeight: FontWeight.w600,
@@ -21,7 +21,7 @@ class DashboardScreen extends StatelessWidget {
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
           children: [
-            SummaryCard(title: 'Total Inventory', value: '120'),
+            SummaryCard(title: 'Total Inventory', value: '60'),
             SummaryCard(title: 'Low Stock Alerts', value: '5'),
             SummaryCard(title: 'Today\'s Orders', value: '25'),
             SummaryCard(title: 'Revenue Overview', value: '\$1200'),
@@ -34,29 +34,44 @@ class DashboardScreen extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(color: Colors.lightGreen[700]),
-              child: Text(
+              child: const Text(
                 'Thoga Kade',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 32,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ),
             ListTile(
-              title: Text('Dashboard'),
+              title: const Text(
+                'Dashboard',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
               onTap: () => Navigator.pushNamed(context, '/'),
             ),
             ListTile(
-              title: Text('Inventory'),
+              title: const Text(
+                'Inventory',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
               onTap: () => Navigator.pushNamed(context, '/inventory'),
             ),
             ListTile(
-              title: Text('Orders'),
+              title: const Text(
+                'Orders',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
               onTap: () => Navigator.pushNamed(context, '/orders'),
             ),
             ListTile(
-              title: Text('Reports'),
+              title: const Text(
+                'Reports',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
               onTap: () => Navigator.pushNamed(context, '/reports'),
             ),
           ],

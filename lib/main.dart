@@ -14,6 +14,7 @@ class ThogaKadeApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       initialRoute: AppRoutes.dashboard,
       routes: AppRoutes.routes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

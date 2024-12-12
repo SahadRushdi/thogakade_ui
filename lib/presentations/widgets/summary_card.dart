@@ -9,7 +9,7 @@ class SummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4.0,
+      elevation: 5.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,13 +18,13 @@ class SummaryCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8.0),
+            SizedBox(height: 3.0),
             Text(
               value,
-              style: TextStyle(fontSize: 24, color: Colors.green),
+              style: TextStyle(fontSize: 28, color: Colors.green),
             ),
           ],
         ),
