@@ -5,7 +5,7 @@ class ReportsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
             'Reports',
           style: TextStyle(
             fontSize: 29,
@@ -19,8 +19,8 @@ class ReportsScreen extends StatelessWidget {
           children: [
             Card(
               child: ListTile(
-                title: Text('Daily Sales'),
-                trailing: Icon(Icons.bar_chart),
+                title: const Text('Daily Sales'),
+                trailing: const Icon(Icons.bar_chart),
                 onTap: () {
                   // Show detailed sales chart (to be implemented)
                 },
@@ -28,8 +28,8 @@ class ReportsScreen extends StatelessWidget {
             ),
             Card(
               child: ListTile(
-                title: Text('Stock Levels'),
-                trailing: Icon(Icons.pie_chart),
+                title: const Text('Stock Levels'),
+                trailing: const Icon(Icons.pie_chart),
                 onTap: () {
                   // Show stock levels chart (to be implemented)
                 },
@@ -37,8 +37,8 @@ class ReportsScreen extends StatelessWidget {
             ),
             Card(
               child: ListTile(
-                title: Text('Revenue Overview'),
-                trailing: Icon(Icons.show_chart),
+                title: const Text('Revenue Overview'),
+                trailing: const Icon(Icons.show_chart),
                 onTap: () {
                   // Show revenue chart (to be implemented)
                 },

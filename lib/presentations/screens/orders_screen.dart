@@ -5,7 +5,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
             'Order Management',
           style: TextStyle(
             fontSize: 29,
@@ -22,7 +22,7 @@ class OrdersScreen extends StatelessWidget {
               child: ListTile(
                 title: Text('Order #${index + 1}'),
                 subtitle: Text('Total: \$${(index + 1) * 20}'),
-                trailing: Text('Status: Pending'),
+                trailing: const Text('Status: Pending'),
                 onTap: () {
                   // Navigate to Order Details (to be implemented)
                 },

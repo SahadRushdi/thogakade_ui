@@ -48,7 +48,7 @@ class DashboardScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              trailing: Icon(Icons.dashboard),
+              trailing: const Icon(Icons.dashboard),
               onTap: () => Navigator.pushNamed(context, '/'),
             ),
             ListTile(
@@ -57,7 +57,7 @@ class DashboardScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              trailing: Icon(Icons.inventory),
+              trailing: const Icon(Icons.inventory),
               onTap: () => Navigator.pushNamed(context, '/inventory'),
             ),
             ListTile(
@@ -66,7 +66,7 @@ class DashboardScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              trailing: Icon(Icons.shopping_bag),
+              trailing: const Icon(Icons.shopping_bag),
               onTap: () => Navigator.pushNamed(context, '/orders'),
             ),
             ListTile(
@@ -75,7 +75,8 @@ class DashboardScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              trailing: Icon(Icons.report),
+              trailing: const Icon(Icons.report),
+
               onTap: () => Navigator.pushNamed(context, '/reports'),
             ),
           ],
