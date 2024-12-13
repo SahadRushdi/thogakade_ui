@@ -11,7 +11,9 @@ class ThogaKadeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Thoga Kade',
-      theme: AppTheme.lightTheme,
+      theme: ThemeData(),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
       initialRoute: AppRoutes.dashboard,
       routes: AppRoutes.routes,
       debugShowCheckedModeBanner: false,

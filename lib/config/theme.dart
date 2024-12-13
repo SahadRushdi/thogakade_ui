@@ -5,4 +5,9 @@ class AppTheme {
     primarySwatch: Colors.green,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
+
+  static final darkTheme = ThemeData(
+    primarySwatch: Colors.deepOrange,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+  );
 }
