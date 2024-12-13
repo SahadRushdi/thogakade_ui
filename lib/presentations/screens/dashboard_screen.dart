@@ -6,7 +6,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Dashboard',
           style: TextStyle(
             fontSize: 29,
@@ -20,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
-          children: [
+          children: const [
             SummaryCard(title: 'Total Inventory', value: '60'),
             SummaryCard(title: 'Low Stock Alerts', value: '5'),
             SummaryCard(title: 'Today\'s Orders', value: '25'),
@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.lightGreen[700]),
+              decoration: BoxDecoration(color: Colors.lightGreen[800]),
               child: const Text(
                 'Thoga Kade',
                 style: TextStyle(

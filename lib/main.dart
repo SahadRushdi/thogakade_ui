@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'config/routes.dart';
-import 'config/theme.dart';
 
 void main() {
   runApp(ThogaKadeApp());
