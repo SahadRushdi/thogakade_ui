@@ -53,11 +53,13 @@ class InventoryScreen extends StatelessWidget {
                             },
                           ),
                           IconButton(
-                            icon: const Icon(Icons.add_shopping_cart_rounded, color: Colors.green),
+                            icon: const Icon(Icons.add_shopping_cart_rounded,
+                                color: Colors.green),
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Vegetable ${index + 1} added to cart'),
+                                  content: Text(
+                                      'Vegetable ${index + 1} added to cart'),
                                   duration: const Duration(seconds: 2),
                                   action: SnackBarAction(
                                     label: 'UNDO',
@@ -72,7 +74,8 @@ class InventoryScreen extends StatelessWidget {
                         ],
                       ),
                       onTap: () {
-                        const snackBar = SnackBar(content: Text('Added TO Cart'));
+                        const snackBar =
+                            SnackBar(content: Text('Added TO Cart'));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                     ),
