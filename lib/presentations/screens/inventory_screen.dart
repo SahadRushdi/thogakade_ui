@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:thogakade_ui/presentations/dialog/edit_inventory_dialog.dart';
-import '../dialog/edit_inventory_dialog.dart';
 
 class InventoryScreen extends StatelessWidget {
   @override
@@ -54,7 +53,7 @@ class InventoryScreen extends StatelessWidget {
                             },
                           ),
                           IconButton(
-                            icon: const Icon(Icons.add_shopping_cart, color: Colors.green),
+                            icon: const Icon(Icons.add_shopping_cart_rounded, color: Colors.green),
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -73,7 +72,7 @@ class InventoryScreen extends StatelessWidget {
                         ],
                       ),
                       onTap: () {
-                        const snackBar = SnackBar(content: Text('Tapped'));
+                        const snackBar = SnackBar(content: Text('Added TO Cart'));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                     ),
