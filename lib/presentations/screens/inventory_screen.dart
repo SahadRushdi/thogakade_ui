@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:thogakade_ui/presentations/dialog/edit_inventory_dialog.dart';
+import '../dialog/edit_inventory_dialog.dart';
 
 class InventoryScreen extends StatelessWidget {
   @override
@@ -21,6 +23,7 @@ class InventoryScreen extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Search Inventory',
                 border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
               ),
             ),
             const SizedBox(height: 16.0),
@@ -29,12 +32,49 @@ class InventoryScreen extends StatelessWidget {
                 itemCount: 10, // Placeholder count
                 itemBuilder: (context, index) {
                   return Card(
+                    margin: const EdgeInsets.only(bottom: 8.0),
                     child: ListTile(
                       title: Text('Vegetable ${index + 1}'),
                       subtitle: Text('Quantity: ${(index + 1) * 10} kg'),
-                      trailing: const Icon(Icons.edit),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit, color: Colors.blue),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return EditInventoryDialog(
+                                    itemName: 'Vegetable ${index + 1}',
+                                    quantity: (index + 1) * 10,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.add_shopping_cart, color: Colors.green),
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Vegetable ${index + 1} added to cart'),
+                                  duration: const Duration(seconds: 2),
+                                  action: SnackBarAction(
+                                    label: 'UNDO',
+                                    onPressed: () {
+                                      // Implement undo functionality here
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                       onTap: () {
-                        // Navigate to Edit Form (to be implemented)
+                        const snackBar = SnackBar(content: Text('Tapped'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                     ),
                   );
@@ -44,7 +84,16 @@ class InventoryScreen extends StatelessWidget {
             FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () {
-                // Navigate to Add Form (to be implemented)
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const EditInventoryDialog(
+                      itemName: '',
+                      quantity: 0,
+                      isNewItem: true,
+                    );
+                  },
+                );
               },
             ),
           ],
