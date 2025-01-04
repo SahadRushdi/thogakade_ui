@@ -17,7 +17,7 @@ class InventoryProvider with ChangeNotifier {
     _fetchItems();
   }
 
-  // Fetch items from Firebase
+  // Get data from Firebase
   void _fetchItems() {
     _databaseRef.onValue.listen((event) {
       final data = event.snapshot.value as Map<dynamic, dynamic>?;
@@ -35,22 +35,22 @@ class InventoryProvider with ChangeNotifier {
     });
   }
 
-  // Add a new item to Firebase
+  // Add a new data to Firebase
   Future<void> addItem(InventoryItem item) async {
     await _databaseRef.push().set(item.toMap());
   }
 
-  // Update an existing item in Firebase
+  // Update an existing data in Firebase
   Future<void> updateItem(String id, InventoryItem updatedItem) async {
     await _databaseRef.child(id).update(updatedItem.toMap());
   }
 
-  // Delete an item from Firebase
+  // Delete an data from Firebase
   Future<void> deleteItem(String id) async {
     await _databaseRef.child(id).remove();
   }
 
-  // Search items by name or category
+  // Search data by name or category
   void searchItems(String query) {
     if (query.isEmpty) {
       _filteredItems = [];

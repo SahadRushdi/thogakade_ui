@@ -4,13 +4,15 @@ import '../../state/models/inventory_item.dart';
 import '../../state/providers/inventory_provider.dart';
 
 class InventoryScreen extends StatelessWidget {
+  const InventoryScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final inventoryProvider = Provider.of<InventoryProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inventory Management'),
+        title: const Text('Inventory Management'),
       ),
       body: Column(
         children: [
@@ -40,13 +42,13 @@ class InventoryScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                           onPressed: () {
                             _showItemForm(context, inventoryProvider, item);
                           },
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () {
                             inventoryProvider.deleteItem(item.id);
                           },
@@ -61,7 +63,7 @@ class InventoryScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           _showItemForm(context, inventoryProvider);
         },
