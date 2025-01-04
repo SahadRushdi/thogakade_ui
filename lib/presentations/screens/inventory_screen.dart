@@ -1,105 +1,139 @@
 import 'package:flutter/material.dart';
-import 'package:thogakade_ui/presentations/dialog/edit_inventory_dialog.dart';
+import 'package:provider/provider.dart';
+import '../../state/models/inventory_item.dart';
+import '../../state/providers/inventory_provider.dart';
 
 class InventoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final inventoryProvider = Provider.of<InventoryProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Inventory Management',
-          style: TextStyle(
-            fontSize: 29,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: Text('Inventory Management'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const TextField(
-              decoration: InputDecoration(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: const InputDecoration(
                 labelText: 'Search Inventory',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
               ),
+              onChanged: (query) {
+                inventoryProvider.searchItems(query);
+              },
             ),
-            const SizedBox(height: 16.0),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10, // Placeholder count
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 8.0),
-                    child: ListTile(
-                      title: Text('Vegetable ${index + 1}'),
-                      subtitle: Text('Quantity: ${(index + 1) * 10} kg'),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit, color: Colors.blue),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return EditInventoryDialog(
-                                    itemName: 'Vegetable ${index + 1}',
-                                    quantity: (index + 1) * 10,
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add_shopping_cart_rounded,
-                                color: Colors.green),
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                      'Vegetable ${index + 1} added to cart'),
-                                  duration: const Duration(seconds: 2),
-                                  action: SnackBarAction(
-                                    label: 'UNDO',
-                                    onPressed: () {
-                                      // Implement undo functionality here
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        const snackBar =
-                            SnackBar(content: Text('Added TO Cart'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      },
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: inventoryProvider.filteredItems.length,
+              itemBuilder: (context, index) {
+                final item = inventoryProvider.filteredItems[index];
+                return Card(
+                  child: ListTile(
+                    title: Text(item.name),
+                    subtitle: Text(
+                        'Price: \$${item.pricePerKg}/kg, Quantity: ${item.quantity} kg'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            _showItemForm(context, inventoryProvider, item);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            inventoryProvider.deleteItem(item.id);
+                          },
+                        ),
+                      ],
                     ),
-                  );
-                },
-              ),
-            ),
-            FloatingActionButton(
-              child: const Icon(Icons.add),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const EditInventoryDialog(
-                      itemName: '',
-                      quantity: 0,
-                      isNewItem: true,
-                    );
-                  },
+                  ),
                 );
               },
             ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          _showItemForm(context, inventoryProvider);
+        },
+      ),
+    );
+  }
+
+  void _showItemForm(BuildContext context, InventoryProvider provider,
+      [InventoryItem? item]) {
+    final nameController = TextEditingController(text: item?.name ?? '');
+    final priceController =
+    TextEditingController(text: item?.pricePerKg.toString() ?? '');
+    final quantityController =
+    TextEditingController(text: item?.quantity.toString() ?? '');
+    final categoryController =
+    TextEditingController(text: item?.category ?? '');
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(item == null ? 'Add Item' : 'Edit Item'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: 'Name'),
+            ),
+            TextField(
+              controller: priceController,
+              decoration: InputDecoration(labelText: 'Price per kg'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: quantityController,
+              decoration: InputDecoration(labelText: 'Quantity'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: categoryController,
+              decoration: InputDecoration(labelText: 'Category'),
+            ),
           ],
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final newItem = InventoryItem(
+                id: item?.id ?? '',
+                name: nameController.text.trim(),
+                pricePerKg: double.tryParse(priceController.text.trim()) ?? 0.0,
+                quantity: int.tryParse(quantityController.text.trim()) ?? 0,
+                category: categoryController.text.trim(),
+              );
+
+              if (item == null) {
+                await provider.addItem(newItem);
+              } else {
+                await provider.updateItem(item.id, newItem);
+              }
+
+              Navigator.of(ctx).pop();
+            },
+            child: Text(item == null ? 'Add' : 'Update'),
+          ),
+        ],
       ),
     );
   }
