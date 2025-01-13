@@ -2,7 +2,7 @@ class InventoryItem {
   final String id; // Firebase key or unique identifier
   final String name;
   final double pricePerKg;
-  final int quantity;
+  final double quantity;
   final String category; // Item category (e.g., vegetables, fruits)
 
   InventoryItem({
